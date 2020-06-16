@@ -11,7 +11,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
 @Sharable
-public class ClientMessageCollector extends ChannelInboundHandlerAdapter {
+public class ClientMessageHandler extends ChannelInboundHandlerAdapter {
 
     private RPCClient client;
 
@@ -19,9 +19,9 @@ public class ClientMessageCollector extends ChannelInboundHandlerAdapter {
 
     private static ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 
-    private Throwable ConnectionClosed = new Exception("starter connection not active error");
+    private Throwable ConnectionClosed = new Exception("connection closed");
 
-    public ClientMessageCollector(RPCClient client, ConcurrentMap<String, RpcFuture<?>> pendingTasks) {
+    public ClientMessageHandler(RPCClient client, ConcurrentMap<String, RpcFuture<?>> pendingTasks) {
         this.client = client;
         this.pendingTasks = pendingTasks;
     }
@@ -68,17 +68,4 @@ public class ClientMessageCollector extends ChannelInboundHandlerAdapter {
         }
     }
 
-/*    public <T> RpcFuture<T> send(RpcInvocation rpcInvocation) {
-        ChannelHandlerContext ctx = context;
-        RpcFuture<T> future = new RpcFuture<T>();
-        if (ctx != null) {
-            ctx.channel().eventLoop().execute(() -> {
-                pendingTasks.put(rpcInvocation.getRequestId(), future);
-                ctx.writeAndFlush(rpcInvocation);
-            });
-        } else {
-            future.fail(ConnectionClosed);
-        }
-        return future;
-    }*/
 }

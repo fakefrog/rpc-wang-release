@@ -1,7 +1,7 @@
 package com.wang.starter.rpc.common.rpc;
 
 import com.alibaba.fastjson.JSON;
-import com.wang.starter.rpc.common.Charsets;
+import com.wang.starter.rpc.common.util.RpcByteBufUtil;
 
 import java.util.List;
 
@@ -24,14 +24,8 @@ public class RpcClientEncoder extends MessageToMessageEncoder<RpcInvocation> {
     protected void encode(ChannelHandlerContext ctx, RpcInvocation rpcInvocation, List<Object> out) {
         ByteBuf buf = PooledByteBufAllocator.DEFAULT.directBuffer();
         String json = JSON.toJSONString(rpcInvocation);
-        writeStr(buf, json);
+        RpcByteBufUtil.writeStr(buf, json);
         out.add(buf);
-    }
-
-    private void writeStr(ByteBuf buf, String s) {
-        byte[] bytes = s.getBytes(Charsets.UTF8);
-        buf.writeInt(bytes.length);
-        buf.writeBytes(bytes);
     }
 
 }

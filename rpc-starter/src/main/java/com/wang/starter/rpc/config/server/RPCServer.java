@@ -26,15 +26,15 @@ public class RPCServer {
 
     private EventLoopGroup group;
 
-    private ServerMessageCollector collector;
+    private ServerMessageHandler serverMessageHandler;
 
     private Channel serverChannel;
 
-    public RPCServer(String ip, int port, int ioThreads, ServerMessageCollector collector) {
+    public RPCServer(String ip, int port, int ioThreads, ServerMessageHandler serverMessageHandler) {
         this.ip = ip;
         this.port = port;
         this.ioThreads = ioThreads;
-        this.collector = collector;
+        this.serverMessageHandler = serverMessageHandler;
     }
 
     void start() {
@@ -47,7 +47,7 @@ public class RPCServer {
                 pipe.addLast(new ReadTimeoutHandler(60));
                 pipe.addLast(new RpcServerDecoder());
                 pipe.addLast(new RpcServerEncoder());
-                pipe.addLast(collector);
+                pipe.addLast(serverMessageHandler);
             }
         }).option(ChannelOption.SO_BACKLOG, 100).option(ChannelOption.SO_REUSEADDR, true)
                 .option(ChannelOption.TCP_NODELAY, true).childOption(ChannelOption.SO_KEEPALIVE, true);
@@ -61,7 +61,7 @@ public class RPCServer {
         // 再斩断消息来源，停止io线程池
         group.shutdownGracefully();
         // 最后停止业务线程
-        collector.closeGracefully();
+        serverMessageHandler.closeGracefully();
     }
 
 }

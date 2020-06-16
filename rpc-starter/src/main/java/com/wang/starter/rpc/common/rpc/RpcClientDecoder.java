@@ -1,13 +1,12 @@
 package com.wang.starter.rpc.common.rpc;
 
 import com.alibaba.fastjson.JSON;
-import com.wang.starter.rpc.common.Charsets;
+import com.wang.starter.rpc.common.util.RpcByteBufUtil;
 
 import java.util.List;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.DecoderException;
 import io.netty.handler.codec.ReplayingDecoder;
 
 /**
@@ -22,7 +21,7 @@ public class RpcClientDecoder extends ReplayingDecoder<RpcResult> {
 
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
-        String content = readStr(in);
+        String content = RpcByteBufUtil.readStr(in);
         RpcResult rpcResult = JSON.parseObject(content, RpcResult.class);
         try {
             Class<?> aClass = Class.forName(rpcResult.getResultType());
@@ -38,15 +37,6 @@ public class RpcClientDecoder extends ReplayingDecoder<RpcResult> {
         out.add(rpcResult);
     }
 
-    private String readStr(ByteBuf in) {
-        int len = in.readInt();
-        if (len < 0 || len > (1 << 20)) {
-            throw new DecoderException("string too long len=" + len);
-        }
-        byte[] bytes = new byte[len];
-        in.readBytes(bytes);
-        return new String(bytes, Charsets.UTF8);
-    }
 
 }
 

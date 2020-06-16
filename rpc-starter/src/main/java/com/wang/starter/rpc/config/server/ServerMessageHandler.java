@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Sharable
 @Slf4j
-public class ServerMessageCollector extends ChannelInboundHandlerAdapter {
+public class ServerMessageHandler extends ChannelInboundHandlerAdapter {
 
     private ThreadPoolExecutor executor;
 
@@ -28,7 +28,7 @@ public class ServerMessageCollector extends ChannelInboundHandlerAdapter {
      */
     private RpcServerRegistry rpcRegistry = new RpcServerRegistry();
 
-    public ServerMessageCollector(ThreadPoolExecutor executor) {
+    public ServerMessageHandler(ThreadPoolExecutor executor) {
         this.executor = executor;
     }
 

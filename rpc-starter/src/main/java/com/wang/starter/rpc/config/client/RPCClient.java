@@ -34,7 +34,7 @@ public class RPCClient {
 
     private EventLoopGroup group;
 
-    private ClientMessageCollector collector;
+    private ClientMessageHandler clientMessageHandler;
 
     private static ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 
@@ -44,17 +44,12 @@ public class RPCClient {
 
     private Channel channel;
 
-    private Throwable ConnectionClosed = new Exception("starter connection not active error");
+    private Throwable ConnectionClosed = new Exception("connection closed");
 
     public RPCClient(String ip, int port) {
         this.ip = ip;
         this.port = port;
         this.init();
-    }
-
-    public RPCClient rpc(String type, Class<?> reqClass) {
-//        registry.register(type, reqClass);
-        return this;
     }
 
     public <T> RpcFuture<T> sendRpcInvocationAsync(RpcInvocation rpcInvocation) {
@@ -63,7 +58,6 @@ public class RPCClient {
             started = true;
         }
         rpcInvocation.setRequestId(RequestId.next());
-//        return collector.send(rpcInvocation);
         return sendMessage(rpcInvocation);
     }
 
@@ -81,7 +75,7 @@ public class RPCClient {
         bootstrap = new Bootstrap();
         group = new NioEventLoopGroup(1);
         bootstrap.group(group);
-        collector = new ClientMessageCollector(this, pendingTasks);
+        clientMessageHandler = new ClientMessageHandler(this, pendingTasks);
         bootstrap.channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
 
             @Override
@@ -96,7 +90,7 @@ public class RPCClient {
                 pipe.addLast(new RpcClientEncoder());
 
                 //inbound
-                pipe.addLast(collector);
+                pipe.addLast(clientMessageHandler);
             }
 
         });
@@ -104,7 +98,6 @@ public class RPCClient {
     }
 
     public void connect() {
-//        bootstrap.connect(ip, port).syncUninterruptibly();
         try {
             ChannelFuture channelFuture = bootstrap.connect(ip, port).sync();
             channel = channelFuture.channel();
@@ -122,9 +115,7 @@ public class RPCClient {
                 return;
             }
             if (!stopped) {
-                group.schedule(() -> {
-                    reconnect();
-                }, 1, TimeUnit.SECONDS);
+                group.schedule(this::reconnect, 1, TimeUnit.SECONDS);
             }
             log.error("connect {}:{} failure", ip, port, future.cause());
         });
@@ -132,7 +123,7 @@ public class RPCClient {
 
     public void close() {
         stopped = true;
-        collector.close();
+        clientMessageHandler.close();
         group.shutdownGracefully(0, 5000, TimeUnit.SECONDS);
     }
 

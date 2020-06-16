@@ -55,8 +55,8 @@ public class RpcConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "rpc.starter", name = "provider", havingValue = "true")
-    public ServerMessageCollector messageCollector() {
-        return new ServerMessageCollector(rpcThreadPoolExecutor());
+    public ServerMessageHandler messageCollector() {
+        return new ServerMessageHandler(rpcThreadPoolExecutor());
     }
 
     @Bean

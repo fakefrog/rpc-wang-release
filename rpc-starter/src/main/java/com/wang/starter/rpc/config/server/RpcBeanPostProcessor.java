@@ -20,10 +20,10 @@ import javax.annotation.Resource;
 public class RpcBeanPostProcessor implements BeanPostProcessor {
 
     @Resource
-    private ServerMessageCollector serverMessageCollector;
+    private ServerMessageHandler ServerMessageHandler;
 
-    public RpcBeanPostProcessor(ServerMessageCollector serverMessageCollector) {
-        this.serverMessageCollector = serverMessageCollector;
+    public RpcBeanPostProcessor(ServerMessageHandler ServerMessageHandler) {
+        this.ServerMessageHandler = ServerMessageHandler;
     }
 
     public RpcBeanPostProcessor() {
@@ -37,7 +37,7 @@ public class RpcBeanPostProcessor implements BeanPostProcessor {
 //        }
         RpcComponent annotation = clazz.getAnnotation(RpcComponent.class);
         if (annotation != null) {
-            serverMessageCollector.registerBean(bean);
+            ServerMessageHandler.registerBean(bean);
         }
         return bean;
     }
