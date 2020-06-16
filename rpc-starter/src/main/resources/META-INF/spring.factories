@@ -1,0 +1,3 @@
+com.wang.starter.rpc.config.annotation.EnableRpc=\
+com.wang.starter.rpc.config.server.RpcConfiguration,\
+com.wang.starter.rpc.config.server.BaseRpcConfiguration
