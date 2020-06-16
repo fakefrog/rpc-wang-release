@@ -50,30 +50,4 @@ public class TestServiceImpl implements ITestService {
         return null;
     }
 
-
-    public static void main(String[] args) {
-        ArrayList<ExpRequest> ins = new ArrayList<>();
-        ins.add(new ExpRequest(1,2));
-        ins.add(new ExpRequest(2,3));
-        ins.add(new ExpRequest(3,4));
-        String s = JSON.toJSONString(ins);
-        Method[] declaredMethods = ITestService.class.getDeclaredMethods();
-        int i = 0;
-        for (Method declaredMethod : declaredMethods) {
-            i++;
-            Parameter[] parameters = declaredMethod.getParameters();
-            for (Parameter parameter : parameters) {
-                System.out.println(parameter.getName());
-                if(i == 2){
-                    Type parameterizedType = parameter.getParameterizedType();
-                    Class<?> type = parameter.getType();
-                    Object object = JSON.parseObject(s, type);
-                    System.out.println(object);
-                    System.out.println(1);
-                }
-            }
-        }
-    }
-
-
 }
