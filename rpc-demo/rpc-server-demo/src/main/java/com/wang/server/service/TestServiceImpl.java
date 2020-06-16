@@ -32,5 +32,11 @@ public class TestServiceImpl implements ITestService {
         return echoResponse;
     }
 
+    @Override
+    public Integer increment(Integer count) {
+
+        return count + 1;
+    }
+
 
 }

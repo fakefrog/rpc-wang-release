@@ -24,8 +24,8 @@ public class TestController {
     @RpcReference
     private ITestService testService;
 
-    @RequestMapping("/test")
-    public String rpcFlows() {
+    @RequestMapping("/fly")
+    public String fly() {
         return testService.fly("james");
     }
 
@@ -36,4 +36,10 @@ public class TestController {
         echoRequest.setAddress(address);
         return testService.echo(echoRequest);
     }
+
+    @RequestMapping("/increment/{count}")
+    public Integer echo(@PathVariable Integer count) {
+        return testService.increment(count);
+    }
+
 }

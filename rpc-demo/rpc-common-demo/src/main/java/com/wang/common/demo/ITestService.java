@@ -17,4 +17,6 @@ public interface ITestService {
 
     EchoResponse echo(EchoRequest echoRequest);
 
+    Integer increment(Integer count);
+
 }
