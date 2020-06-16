@@ -1,6 +1,7 @@
-package com.wang.starter.rpc.config.server;
+package com.wang.starter.rpc.config.server.spring;
 
 import com.wang.starter.rpc.config.annotation.RpcComponent;
+import com.wang.starter.rpc.config.server.handler.ServerMessageHandler;
 
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
@@ -20,10 +21,10 @@ import javax.annotation.Resource;
 public class RpcBeanPostProcessor implements BeanPostProcessor {
 
     @Resource
-    private ServerMessageHandler ServerMessageHandler;
+    private ServerMessageHandler serverMessageHandler;
 
-    public RpcBeanPostProcessor(ServerMessageHandler ServerMessageHandler) {
-        this.ServerMessageHandler = ServerMessageHandler;
+    public RpcBeanPostProcessor(ServerMessageHandler serverMessageHandler) {
+        this.serverMessageHandler = serverMessageHandler;
     }
 
     public RpcBeanPostProcessor() {
@@ -37,7 +38,7 @@ public class RpcBeanPostProcessor implements BeanPostProcessor {
 //        }
         RpcComponent annotation = clazz.getAnnotation(RpcComponent.class);
         if (annotation != null) {
-            ServerMessageHandler.registerBean(bean);
+            serverMessageHandler.registerBean(bean);
         }
         return bean;
     }

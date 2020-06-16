@@ -1,4 +1,4 @@
-package com.wang.starter.rpc.config.server;
+package com.wang.starter.rpc.common.rpc;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

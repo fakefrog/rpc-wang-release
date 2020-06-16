@@ -1,6 +1,8 @@
-package com.wang.starter.rpc.config.client;
+package com.wang.starter.rpc.config.client.proxy;
 
 import com.wang.starter.rpc.common.rpc.RpcInvocation;
+import com.wang.starter.rpc.config.client.RPCClient;
+import com.wang.starter.rpc.common.rpc.RpcClientRegistry;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;

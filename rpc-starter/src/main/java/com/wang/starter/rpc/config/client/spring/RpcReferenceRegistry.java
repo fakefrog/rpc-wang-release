@@ -1,5 +1,6 @@
-package com.wang.starter.rpc.config.client;
+package com.wang.starter.rpc.config.client.spring;
 
+import com.wang.starter.rpc.config.client.proxy.RpcReferenceFactoryBean;
 import com.wang.starter.rpc.config.annotation.RpcReference;
 
 import org.springframework.beans.BeansException;

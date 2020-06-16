@@ -1,4 +1,4 @@
-package com.wang.starter.rpc.config.client;
+package com.wang.starter.rpc.config.client.spring;
 
 import com.wang.starter.rpc.config.annotation.RpcReference;
 

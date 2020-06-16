@@ -1,4 +1,4 @@
-package com.wang.starter.rpc.config.client;
+package com.wang.starter.rpc.config.client.proxy;
 
 import org.springframework.beans.factory.FactoryBean;
 

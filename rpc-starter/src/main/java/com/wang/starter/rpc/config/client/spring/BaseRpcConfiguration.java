@@ -1,8 +1,6 @@
-package com.wang.starter.rpc.config.server;
+package com.wang.starter.rpc.config.client.spring;
 
 import com.wang.starter.rpc.config.annotation.RpcReference;
-import com.wang.starter.rpc.config.client.RpcReferenceAnnotationBeanPostProcessor;
-import com.wang.starter.rpc.config.client.RpcReferenceRegistry;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

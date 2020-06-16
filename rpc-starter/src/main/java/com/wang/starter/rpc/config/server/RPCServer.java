@@ -1,7 +1,8 @@
 package com.wang.starter.rpc.config.server;
 
-import com.wang.starter.rpc.common.rpc.RpcServerDecoder;
-import com.wang.starter.rpc.common.rpc.RpcServerEncoder;
+import com.wang.starter.rpc.config.server.handler.ServerMessageHandler;
+import com.wang.starter.rpc.config.server.handler.decoder.RpcServerDecoder;
+import com.wang.starter.rpc.config.server.handler.encoder.RpcServerEncoder;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
@@ -37,7 +38,7 @@ public class RPCServer {
         this.serverMessageHandler = serverMessageHandler;
     }
 
-    void start() {
+    public void start() {
         ServerBootstrap bootstrap = new ServerBootstrap();
         group = new NioEventLoopGroup(ioThreads);
         bootstrap.group(group).channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer<SocketChannel>() {

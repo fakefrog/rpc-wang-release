@@ -1,4 +1,4 @@
-package com.wang.starter.rpc.config.client;
+package com.wang.starter.rpc.common.rpc;
 
 public class RPCException extends RuntimeException {
 

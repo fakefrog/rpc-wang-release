@@ -1,4 +1,4 @@
-package com.wang.starter.rpc.config.client;
+package com.wang.starter.rpc.config.server.spring;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -12,9 +12,9 @@ import lombok.Data;
  * @author wjj
  * @date 2019/3/1 0:47
  */
-@ConfigurationProperties(prefix = "rpc.starter.client")
+@ConfigurationProperties(prefix = "rpc.starter.server")
 @Data
-public class RpcClientProperties {
+public class RpcServerProperties {
 
     private static final String DEFAULT_IP = "127.0.0.1";
 
@@ -34,5 +34,7 @@ public class RpcClientProperties {
 
     private int workerThreads = DEFAULT_WORKER_THREADS;
 
+    //第一位是client,第二位是server
+//    private int side = DEFAULT_SIDE;
 
 }

@@ -1,11 +1,11 @@
-package com.wang.starter.rpc.config.server;
+package com.wang.starter.rpc.config.server.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.wang.starter.rpc.common.rpc.RpcInvocation;
 import com.wang.starter.rpc.common.rpc.RpcResult;
-import com.wang.starter.rpc.common.rpc.RpcServerRegistry;
 import com.wang.starter.rpc.common.rpc.ServerInterfaceInfo;
 import com.wang.starter.rpc.common.util.CtxUtil;
+import com.wang.starter.rpc.config.server.spring.RpcServerRegistry;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -32,15 +32,7 @@ public class ServerMessageHandler extends ChannelInboundHandlerAdapter {
         this.executor = executor;
     }
 
-    void registerBean(Object bean) {
-        Class<?>[] interfaces = bean.getClass().getInterfaces();
-        //注册接口名
-        for (Class<?> anInterface : interfaces) {
-            rpcRegistry.register(anInterface, bean);
-        }
-    }
-
-    void closeGracefully() {
+    public void closeGracefully() {
         this.executor.shutdown();
         try {
             this.executor.awaitTermination(10, TimeUnit.SECONDS);
@@ -48,6 +40,14 @@ public class ServerMessageHandler extends ChannelInboundHandlerAdapter {
 
         }
         this.executor.shutdownNow();
+    }
+
+    public void registerBean(Object bean) {
+        Class<?>[] interfaces = bean.getClass().getInterfaces();
+        //注册接口名
+        for (Class<?> anInterface : interfaces) {
+            rpcRegistry.register(anInterface, bean);
+        }
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.wang.starter.rpc.config.client;
+package com.wang.starter.rpc.common.rpc;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
