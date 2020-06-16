@@ -3,9 +3,6 @@ package com.wang.starter.rpc.config.server;
 import com.wang.starter.rpc.common.rpc.RpcServerDecoder;
 import com.wang.starter.rpc.common.rpc.RpcServerEncoder;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;

@@ -1,8 +1,5 @@
 package com.wang.starter.rpc.config.client;
 
-import com.wang.common.demo.ITestService;
-import com.wang.common.demo.domain.ExpRequest;
-import com.wang.common.demo.domain.ExpResponse;
 import com.wang.starter.rpc.common.rpc.RpcInvocation;
 
 import java.io.Serializable;

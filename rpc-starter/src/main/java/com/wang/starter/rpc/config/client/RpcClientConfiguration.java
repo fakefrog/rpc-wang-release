@@ -1,12 +1,7 @@
 package com.wang.starter.rpc.config.client;
 
-import com.wang.starter.rpc.config.server.RPCServer;
-import com.wang.starter.rpc.config.server.RpcServerProperties;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
