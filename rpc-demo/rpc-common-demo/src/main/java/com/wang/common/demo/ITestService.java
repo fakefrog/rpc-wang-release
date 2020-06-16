@@ -1,9 +1,7 @@
 package com.wang.common.demo;
 
-import com.wang.common.demo.domain.ExpRequest;
-import com.wang.common.demo.domain.ExpResponse;
-
-import java.util.List;
+import com.wang.common.demo.domain.EchoRequest;
+import com.wang.common.demo.domain.EchoResponse;
 
 /**
  * <p>Package:com.wang.starter.service</p>
@@ -17,9 +15,6 @@ public interface ITestService {
 
     String fly(String name);
 
-    ExpResponse exp(ExpRequest expRequest);
-
-    ExpResponse exp(List<ExpRequest> expRequest);
-
+    EchoResponse echo(EchoRequest echoRequest);
 
 }

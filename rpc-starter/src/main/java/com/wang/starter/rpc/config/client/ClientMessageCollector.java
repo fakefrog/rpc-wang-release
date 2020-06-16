@@ -21,7 +21,7 @@ public class ClientMessageCollector extends ChannelInboundHandlerAdapter {
 
     private Throwable ConnectionClosed = new Exception("starter connection not active error");
 
-    public ClientMessageCollector(RPCClient client,ConcurrentMap<String, RpcFuture<?>> pendingTasks) {
+    public ClientMessageCollector(RPCClient client, ConcurrentMap<String, RpcFuture<?>> pendingTasks) {
         this.client = client;
         this.pendingTasks = pendingTasks;
     }

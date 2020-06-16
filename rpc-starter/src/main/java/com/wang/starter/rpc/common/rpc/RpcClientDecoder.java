@@ -26,9 +26,9 @@ public class RpcClientDecoder extends ReplayingDecoder<RpcResult> {
         RpcResult rpcResult = JSON.parseObject(content, RpcResult.class);
         try {
             Class<?> aClass = Class.forName(rpcResult.getResultType());
-            if(aClass.equals(String.class)){
+            if (aClass.equals(String.class)) {
                 rpcResult.setResult(rpcResult.getResult().toString());
-            }else {
+            } else {
                 Object object = JSON.parseObject(rpcResult.getResult().toString(), aClass);
                 rpcResult.setResult(object);
             }

@@ -36,7 +36,7 @@ public class RpcReferenceRegistry implements BeanDefinitionRegistryPostProcessor
         for (String beanDefinitionName : beanDefinitionNames) {
             BeanDefinition beanDefinition = registry.getBeanDefinition(beanDefinitionName);
             String beanClassName = beanDefinition.getBeanClassName();
-            if(StringUtils.isEmpty(beanClassName)){
+            if (StringUtils.isEmpty(beanClassName)) {
                 continue;
             }
             Class clazz = null;

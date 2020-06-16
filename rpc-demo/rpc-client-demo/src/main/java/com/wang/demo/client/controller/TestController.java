@@ -2,8 +2,11 @@ package com.wang.demo.client.controller;
 
 
 import com.wang.common.demo.ITestService;
+import com.wang.common.demo.domain.EchoRequest;
+import com.wang.common.demo.domain.EchoResponse;
 import com.wang.starter.rpc.config.annotation.RpcReference;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,5 +27,13 @@ public class TestController {
     @RequestMapping("/test")
     public String rpcFlows() {
         return testService.fly("james");
+    }
+
+    @RequestMapping("/echo/{name}/{address}")
+    public EchoResponse echo(@PathVariable String name, @PathVariable String address) {
+        EchoRequest echoRequest = new EchoRequest();
+        echoRequest.setName(name);
+        echoRequest.setAddress(address);
+        return testService.echo(echoRequest);
     }
 }

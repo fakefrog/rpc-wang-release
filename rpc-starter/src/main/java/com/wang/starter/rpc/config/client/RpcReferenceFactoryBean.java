@@ -29,7 +29,7 @@ public class RpcReferenceFactoryBean implements FactoryBean {
         return clazz;
     }
 
-    RpcReferenceProxy getProxy(){
+    RpcReferenceProxy getProxy() {
         return new RpcReferenceProxy();
     }
 

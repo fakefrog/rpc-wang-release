@@ -80,21 +80,21 @@ public class ServerMessageCollector extends ChannelInboundHandlerAdapter {
             Class[] params = new Class[args.length];
             for (int i = 0; i < args.length; i++) {
                 params[i] = Class.forName(rpcInvocation.getArgsType()[i]);
-                if(params[i].equals(String.class)){
+                if (params[i].equals(String.class)) {
                     realArgs[i] = args[i].toString();
-                }else {
+                } else {
                     realArgs[i] = JSON.parseObject(args[i].toString(), params[i]);
                 }
             }
             Method suitableMethod = serverInterfaceInfo.getSuitableMethod(rpcInvocation);
             RpcResult rpcResult = new RpcResult();
-            if(null != suitableMethod){
+            if (null != suitableMethod) {
                 Object result = serverInterfaceInfo.getSuitableMethod(rpcInvocation).invoke(serverInterfaceInfo.getTargetObject(), realArgs);
                 rpcResult.setResult(result);
                 rpcResult.setRequestId(rpcInvocation.getRequestId());
                 rpcResult.setAttachments(rpcInvocation.getAttachments());
                 ctx.writeAndFlush(rpcResult);
-            }else{
+            } else {
                 CtxUtil.closeCtx(ctx, "找不到对应的方法");
             }
         } catch (ClassNotFoundException e) {

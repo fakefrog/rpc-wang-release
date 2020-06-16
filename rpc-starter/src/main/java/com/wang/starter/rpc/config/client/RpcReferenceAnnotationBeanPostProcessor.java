@@ -44,11 +44,12 @@ import lombok.extern.slf4j.Slf4j;
  * <p>Package:com.wang.starter.rpc.config.annotation</p>
  * <p>Description: </p>
  * <p>Company: com.2dfire</p>
- *
+ * <p>
  * AbstractAutowireCapableBeanFactory  bdp.postProcessMergedBeanDefinition(mbd, beanType, beanName);
- *
- *
+ * <p>
+ * <p>
  * 模仿AnnotationBeanPostProcessor
+ *
  * @author baiyundou
  * @date 2020/6/16 14:56
  */
@@ -72,7 +73,7 @@ public class RpcReferenceAnnotationBeanPostProcessor extends InstantiationAwareB
 
 
     public RpcReferenceAnnotationBeanPostProcessor() {
-            autowiredAnnotationTypes.add(RpcReference.class);
+        autowiredAnnotationTypes.add(RpcReference.class);
     }
 
 
@@ -100,11 +101,9 @@ public class RpcReferenceAnnotationBeanPostProcessor extends InstantiationAwareB
         InjectionMetadata metadata = findRpcMetadata(beanName, bean.getClass(), pvs);
         try {
             metadata.inject(bean, beanName, pvs);
-        }
-        catch (BeanCreationException ex) {
+        } catch (BeanCreationException ex) {
             throw ex;
-        }
-        catch (Throwable ex) {
+        } catch (Throwable ex) {
             throw new BeanCreationException(beanName, "Injection of autowired dependencies failed", ex);
         }
         return pvs;
@@ -212,8 +211,7 @@ public class RpcReferenceAnnotationBeanPostProcessor extends InstantiationAwareB
             Object value;
             if (this.cached) {
                 value = resolvedCachedArgument(beanName, this.cachedFieldValue);
-            }
-            else {
+            } else {
                 DependencyDescriptor desc = new DependencyDescriptor(field, this.required);
                 desc.setContainingClass(bean.getClass());
                 Set<String> autowiredBeanNames = new LinkedHashSet<>(1);
@@ -221,8 +219,7 @@ public class RpcReferenceAnnotationBeanPostProcessor extends InstantiationAwareB
                 TypeConverter typeConverter = beanFactory.getTypeConverter();
                 try {
                     value = beanFactory.resolveDependency(desc, beanName, autowiredBeanNames, typeConverter);
-                }
-                catch (BeansException ex) {
+                } catch (BeansException ex) {
                     throw new UnsatisfiedDependencyException(null, beanName, new InjectionPoint(field), ex);
                 }
                 synchronized (this) {
@@ -238,8 +235,7 @@ public class RpcReferenceAnnotationBeanPostProcessor extends InstantiationAwareB
                                             desc, autowiredBeanName, field.getType());
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             this.cachedFieldValue = null;
                         }
                         this.cached = true;
@@ -259,8 +255,7 @@ public class RpcReferenceAnnotationBeanPostProcessor extends InstantiationAwareB
             DependencyDescriptor descriptor = (DependencyDescriptor) cachedArgument;
             Assert.state(this.beanFactory != null, "No BeanFactory available");
             return this.beanFactory.resolveDependency(descriptor, beanName, null, null);
-        }
-        else {
+        } else {
             return cachedArgument;
         }
     }

@@ -20,14 +20,14 @@ import org.springframework.context.annotation.Configuration;
 public class BaseRpcConfiguration {
 
     @Bean
-    @ConditionalOnProperty(prefix = "rpc.starter",name = "consumer",havingValue = "true")
-    public RpcReferenceAnnotationBeanPostProcessor rpcReferenceAnnotationBeanPostProcessor(){
+    @ConditionalOnProperty(prefix = "rpc.starter", name = "consumer", havingValue = "true")
+    public RpcReferenceAnnotationBeanPostProcessor rpcReferenceAnnotationBeanPostProcessor() {
         return new RpcReferenceAnnotationBeanPostProcessor(RpcReference.class);
     }
 
     @Bean
-    @ConditionalOnProperty(prefix = "rpc.starter",name = "consumer",havingValue = "true")
-    public RpcReferenceRegistry rpcReferenceRegistry(){
+    @ConditionalOnProperty(prefix = "rpc.starter", name = "consumer", havingValue = "true")
+    public RpcReferenceRegistry rpcReferenceRegistry() {
         return new RpcReferenceRegistry();
     }
 
