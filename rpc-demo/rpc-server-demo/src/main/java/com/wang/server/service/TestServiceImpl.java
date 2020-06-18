@@ -13,7 +13,7 @@ import com.wang.starter.rpc.config.annotation.RpcComponent;
  * @author baiyundou
  * @date 2020/6/12 3:00
  */
-@RpcComponent(name = "testServiceImpl", requestType = Integer.class)
+@RpcComponent(name = "testServiceImpl")
 public class TestServiceImpl implements ITestService {
 
     private static final String LIVE_FORMAT = "I am %s living in %s";

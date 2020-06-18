@@ -24,6 +24,4 @@ public @interface RpcComponent {
 
     String name();
 
-    Class requestType();
-
 }
