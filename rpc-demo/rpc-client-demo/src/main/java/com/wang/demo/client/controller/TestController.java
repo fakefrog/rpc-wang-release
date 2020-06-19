@@ -26,7 +26,6 @@ public class TestController {
 
     @RequestMapping("/fly")
     public String fly() {
-        String s = testService.toString();
         return testService.fly("james");
     }
 

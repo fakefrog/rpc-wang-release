@@ -2,6 +2,7 @@ package com.wang.starter.rpc.config.server.spring;
 
 
 import com.wang.starter.rpc.common.rpc.RpcThreadFactory;
+import com.wang.starter.rpc.common.util.ShutDownUtil;
 import com.wang.starter.rpc.config.server.RpcServer;
 import com.wang.starter.rpc.config.server.handler.ServerMessageHandler;
 
@@ -37,13 +38,13 @@ public class RpcConfiguration {
         RpcServer rpcServer = new RpcServer(mRpcServerProperties.getIp(), mRpcServerProperties.getPort(),
                 mRpcServerProperties.getIoThreads(), messageCollector());
         rpcServer.start();
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+        ShutDownUtil.addShutHook(() -> {
             try {
                 rpcServer.stop();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }));
+        });
         return rpcServer;
     }
 

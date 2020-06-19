@@ -17,7 +17,7 @@ public class ClientMessageHandler extends ChannelInboundHandlerAdapter {
 
     private RpcClient client;
 
-    private volatile ChannelHandlerContext context;
+    private ChannelHandlerContext context;
 
     private static ConcurrentMap<String, RpcFuture<?>> pendingTasks = new ConcurrentHashMap<>();
 

@@ -1,5 +1,6 @@
 package com.wang.starter.rpc.common.rpc;
 
+import com.wang.starter.rpc.common.util.ShutDownUtil;
 import com.wang.starter.rpc.config.client.RpcClient;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,15 +23,14 @@ public class RpcClientRegistry {
             RpcClient client = new RpcClient(host, port);
             try {
                 RpcClient clientTmp = client;
-                Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                ShutDownUtil.addShutHook(() -> {
                     try {
                         clientTmp.close();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }));
+                });
             } catch (Exception e) {
-                e.printStackTrace();
             }
             return client;
         });
