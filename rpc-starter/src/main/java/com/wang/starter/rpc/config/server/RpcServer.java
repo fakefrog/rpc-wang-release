@@ -17,7 +17,7 @@ import io.netty.handler.timeout.ReadTimeoutHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class RPCServer {
+public class RpcServer {
 
     private String ip;
 
@@ -31,7 +31,7 @@ public class RPCServer {
 
     private Channel serverChannel;
 
-    public RPCServer(String ip, int port, int ioThreads, ServerMessageHandler serverMessageHandler) {
+    public RpcServer(String ip, int port, int ioThreads, ServerMessageHandler serverMessageHandler) {
         this.ip = ip;
         this.port = port;
         this.ioThreads = ioThreads;

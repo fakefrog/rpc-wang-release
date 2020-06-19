@@ -2,7 +2,7 @@ package com.wang.starter.rpc.config.client.proxy;
 
 import com.wang.starter.rpc.common.rpc.RpcClientRegistry;
 import com.wang.starter.rpc.common.rpc.RpcInvocation;
-import com.wang.starter.rpc.config.client.RPCClient;
+import com.wang.starter.rpc.config.client.RpcClient;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
@@ -44,7 +44,7 @@ public class RpcReferenceProxy implements InvocationHandler, Serializable {
                 log.error("找不到方法");
             }
         }
-        RPCClient rpcClient = RpcClientRegistry.addRpcClient("localhost", 8888);
+        RpcClient rpcClient = RpcClientRegistry.addRpcClient("localhost", 8888);
         RpcInvocation rpcInvocation = new RpcInvocation();
         try {
             rpcInvocation.setMethod(method.getName());

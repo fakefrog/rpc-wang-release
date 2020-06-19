@@ -2,7 +2,7 @@ package com.wang.starter.rpc.config.client.handler;
 
 import com.wang.starter.rpc.common.rpc.RpcFuture;
 import com.wang.starter.rpc.common.rpc.RpcResult;
-import com.wang.starter.rpc.config.client.RPCClient;
+import com.wang.starter.rpc.config.client.RpcClient;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -15,7 +15,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 @Sharable
 public class ClientMessageHandler extends ChannelInboundHandlerAdapter {
 
-    private RPCClient client;
+    private RpcClient client;
 
     private volatile ChannelHandlerContext context;
 
@@ -23,7 +23,7 @@ public class ClientMessageHandler extends ChannelInboundHandlerAdapter {
 
     private Throwable ConnectionClosed = new Exception("connection closed");
 
-    public ClientMessageHandler(RPCClient client, ConcurrentMap<String, RpcFuture<?>> pendingTasks) {
+    public ClientMessageHandler(RpcClient client, ConcurrentMap<String, RpcFuture<?>> pendingTasks) {
         this.client = client;
         this.pendingTasks = pendingTasks;
     }

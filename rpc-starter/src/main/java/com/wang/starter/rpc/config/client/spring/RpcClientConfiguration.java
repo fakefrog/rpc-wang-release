@@ -21,7 +21,7 @@ public class RpcClientConfiguration {
 
 /*    @Bean
     @ConditionalOnProperty(prefix = "rpc.starter",name = "consumer",havingValue = "true")
-    public RPCClient rpcClient() {
+    public RpcClient rpcClient() {
         return new RPCClient(rpcClientProperties.getIp(), rpcClientProperties.getPort());
     }*/
 

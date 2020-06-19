@@ -27,7 +27,7 @@ import io.netty.handler.timeout.ReadTimeoutHandler;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class RPCClient {
+public class RpcClient {
 
     private String ip;
 
@@ -49,7 +49,7 @@ public class RPCClient {
 
     private Throwable ConnectionClosed = new Exception("connection closed");
 
-    public RPCClient(String ip, int port) {
+    public RpcClient(String ip, int port) {
         this.ip = ip;
         this.port = port;
         this.init();

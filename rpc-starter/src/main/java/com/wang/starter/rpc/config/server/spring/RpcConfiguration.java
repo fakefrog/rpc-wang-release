@@ -2,7 +2,7 @@ package com.wang.starter.rpc.config.server.spring;
 
 
 import com.wang.starter.rpc.common.rpc.RpcThreadFactory;
-import com.wang.starter.rpc.config.server.RPCServer;
+import com.wang.starter.rpc.config.server.RpcServer;
 import com.wang.starter.rpc.config.server.handler.ServerMessageHandler;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +33,8 @@ public class RpcConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "rpc.starter", name = "provider", havingValue = "true")
-    public RPCServer rpcServer() {
-        RPCServer rpcServer = new RPCServer(mRpcServerProperties.getIp(), mRpcServerProperties.getPort(),
+    public RpcServer rpcServer() {
+        RpcServer rpcServer = new RpcServer(mRpcServerProperties.getIp(), mRpcServerProperties.getPort(),
                 mRpcServerProperties.getIoThreads(), messageCollector());
         rpcServer.start();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
