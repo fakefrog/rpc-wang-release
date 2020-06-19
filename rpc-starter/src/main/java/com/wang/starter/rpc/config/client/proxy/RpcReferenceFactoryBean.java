@@ -15,9 +15,9 @@ import lombok.Data;
 @Data
 public class RpcReferenceFactoryBean implements FactoryBean {
 
-    private Class needProxyInterface;
+    private Class<?> needProxyInterface;
 
-    private Class clazz;
+    private Class<?> clazz;
 
     @Override
     public Object getObject() throws Exception {

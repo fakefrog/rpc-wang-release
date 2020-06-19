@@ -2,11 +2,11 @@ package com.wang.starter.rpc.config.client;
 
 import com.wang.starter.rpc.common.RequestId;
 import com.wang.starter.rpc.common.rpc.RPCException;
-import com.wang.starter.rpc.config.client.handler.decoder.RpcClientDecoder;
-import com.wang.starter.rpc.config.client.handler.encoder.RpcClientEncoder;
 import com.wang.starter.rpc.common.rpc.RpcFuture;
 import com.wang.starter.rpc.common.rpc.RpcInvocation;
 import com.wang.starter.rpc.config.client.handler.ClientMessageHandler;
+import com.wang.starter.rpc.config.client.handler.decoder.RpcClientDecoder;
+import com.wang.starter.rpc.config.client.handler.encoder.RpcClientEncoder;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -82,7 +82,7 @@ public class RPCClient {
         bootstrap.channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
 
             @Override
-            protected void initChannel(SocketChannel ch) throws Exception {
+            protected void initChannel(SocketChannel ch) {
                 ChannelPipeline pipe = ch.pipeline();
                 pipe.addLast(new ReadTimeoutHandler(60));
 

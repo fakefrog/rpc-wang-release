@@ -1,8 +1,8 @@
 package com.wang.starter.rpc.config.client.proxy;
 
+import com.wang.starter.rpc.common.rpc.RpcClientRegistry;
 import com.wang.starter.rpc.common.rpc.RpcInvocation;
 import com.wang.starter.rpc.config.client.RPCClient;
-import com.wang.starter.rpc.common.rpc.RpcClientRegistry;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
@@ -24,7 +24,7 @@ public class RpcReferenceProxy implements InvocationHandler, Serializable {
 
     private static final long serialVersionUID = -4467164789570764661L;
 
-    private Class interfaceClazz;
+    private Class<?> interfaceClazz;
 
     @SuppressWarnings("unchecked")
     public <T> T newProxy(Class<T> myInterfaces) {
@@ -36,9 +36,13 @@ public class RpcReferenceProxy implements InvocationHandler, Serializable {
     }
 
     @Override
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        if (method.getName().equals("toString")) {
-            return interfaceClazz.toString();
+    public Object invoke(Object proxy, Method method, Object[] args) {
+        if(method.getDeclaringClass().equals(Object.class)){
+            try {
+                return method.invoke(interfaceClazz);
+            } catch (Exception e) {
+                log.error("找不到方法");
+            }
         }
         RPCClient rpcClient = RpcClientRegistry.addRpcClient("localhost", 8888);
         RpcInvocation rpcInvocation = new RpcInvocation();
@@ -55,8 +59,7 @@ public class RpcReferenceProxy implements InvocationHandler, Serializable {
         } catch (Exception e) {
             log.error("error,", e);
         }
-        Object result = rpcClient.send(rpcInvocation);
-        return result;
+        return rpcClient.send(rpcInvocation);
     }
 
 }
